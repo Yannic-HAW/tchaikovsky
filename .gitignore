@@ -6,3 +6,4 @@ build/
 lib/alljoyn_java.dll
 lib/slf4j-simple-1.7.21.jar
 src/main/java/allplay/
+.gradle/

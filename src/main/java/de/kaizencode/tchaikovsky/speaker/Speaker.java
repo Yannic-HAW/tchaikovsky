@@ -266,6 +266,24 @@ public interface Speaker {
      * @return The {@link Volume} of the speaker.
      */
     Volume volume();
+    
+    /**
+     * Group speakers with {@link ZoneManager} of the speaker.
+     * 
+     * @param speakerItems
+     *            A list of speakers {@link Speaker} to group with the speaker
+     * @throws SpeakerException
+     *             if the {@link ZoneManager} group speakers failed
+     */
+    void createZone(List<Speaker> speakerItems) throws SpeakerException;
+    
+    /**
+     * {@link ZoneManager} release currently grouped slaves of speaker.
+     * 
+     * @throws SpeakerException
+     *             if the {@link ZoneManager} could not release the slaves
+     */
+    void releaseZone() throws SpeakerException;
 
     /**
      * Adds a listener which is notified when the state of the speaker changes.
