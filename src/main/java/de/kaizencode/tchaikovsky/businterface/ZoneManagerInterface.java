@@ -16,15 +16,15 @@
  */
 package de.kaizencode.tchaikovsky.businterface;
 
+
+import java.util.Map;
+
 import org.alljoyn.bus.BusException;
 import org.alljoyn.bus.annotation.BusInterface;
 import org.alljoyn.bus.annotation.BusMethod;
 import org.alljoyn.bus.annotation.BusProperty;
 import org.alljoyn.bus.annotation.BusSignal;
 
-import de.kaizencode.tchaikovsky.speaker.PlaylistItem;
-import de.kaizencode.tchaikovsky.speaker.remote.RemotePlaylist;
-import de.kaizencode.tchaikovsky.speaker.remote.RemoteVolumeRange;
 import de.kaizencode.tchaikovsky.speaker.remote.RemoteZoneItem;
 
 /**
@@ -44,7 +44,7 @@ public interface ZoneManagerInterface {
     @BusMethod(name = "CreateZone", signature = "as", replySignature = "sia{si}")
     public RemoteZoneItem createZone(String[] speakers) throws BusException;
     
-    //@BusSignal(name = "OnZoneChanged")
-    //public void onZoneChanged(short volume) throws BusException;
-
+    @BusSignal(name = "OnZoneChanged")
+    public void onZoneChanged(String zoneId, int timestamp, Map<String,Integer> slaves) throws BusException;
+    
 }

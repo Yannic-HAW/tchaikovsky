@@ -23,6 +23,7 @@ import org.alljoyn.bus.annotation.Position;
 import org.alljoyn.bus.annotation.Signature;
 
 import de.kaizencode.tchaikovsky.speaker.PlayerInfo;
+import de.kaizencode.tchaikovsky.speaker.ZoneInfo;
 
 public class RemotePlayerInfo implements PlayerInfo {
 
@@ -57,10 +58,10 @@ public class RemotePlayerInfo implements PlayerInfo {
         return maxVolume;
     }
 
-    // @Override
-    // public ZoneInfo getZoneInfo() {
-    // return zoneInfo;
-    // }
+    @Override
+    public ZoneInfo getZoneInfo() {
+        return zoneInfo;
+    }
 
     @Override
     public String toString() {

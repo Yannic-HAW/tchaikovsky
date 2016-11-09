@@ -16,8 +16,9 @@
  */
 package de.kaizencode.tchaikovsky.speaker;
 
+import java.util.List;
+
 import de.kaizencode.tchaikovsky.exception.SpeakerException;
-import de.kaizencode.tchaikovsky.speaker.remote.RemoteZoneItem;
 
 /**
  * Group control of the speaker.
@@ -41,12 +42,20 @@ public interface ZoneManager {
     public short getVersion() throws SpeakerException;
 
     /**
-     * @return The {@link RemoteZoneItem} of the speaker.
+     * @return The {@link ZoneItem} of the speaker.
      * @param speakers
      *          Array of {@link Speaker} to add to the group
      * @throws SpeakerException
      *             if the group could not be created
      */
-    public RemoteZoneItem createZone(String[] speakers) throws SpeakerException;
+    public ZoneItem createZone(List<Speaker> speakerItems) throws SpeakerException;
+       
+    /**
+     * {@link ZoneManager} release currently grouped slaves of speaker.
+     * 
+     * @throws SpeakerException
+     *             if the {@link ZoneManager} could not release the slaves
+     */
+    public void releaseZone() throws SpeakerException;
 
 }

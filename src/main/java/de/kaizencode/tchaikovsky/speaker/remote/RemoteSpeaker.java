@@ -137,21 +137,10 @@ public class RemoteSpeaker implements Speaker, SpeakerConnectionListener {
     }
     
     @Override
-    public void createZone(List<Speaker> speakerItems) throws SpeakerException {
-        String[] speakerArray = new String[speakerItems.size()];
-        
-        for(int i=0; i < speakerItems.size(); i++) {
-            speakerArray[i] = "net.allplay.MediaPlayer.i" + speakerItems.get(i).getId();
-        }
-        
-        zoneManager.createZone(speakerArray);      
+    public ZoneManager zoneManager() {
+        return zoneManager;
     }
-
-    @Override
-    public void releaseZone() throws SpeakerException {
-        zoneManager.createZone(new String[]{""});        
-    }
-    
+       
     @Override
     public RemotePlayerInfo getPlayerInfo() throws SpeakerException {
         try {

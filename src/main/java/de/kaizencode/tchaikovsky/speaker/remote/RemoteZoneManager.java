@@ -16,17 +16,19 @@
  */
 package de.kaizencode.tchaikovsky.speaker.remote;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.alljoyn.bus.BusException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import de.kaizencode.tchaikovsky.businterface.ZoneManagerInterface;
+import de.kaizencode.tchaikovsky.speaker.Speaker;
+import de.kaizencode.tchaikovsky.speaker.ZoneItem;
 import de.kaizencode.tchaikovsky.speaker.ZoneManager;
 import de.kaizencode.tchaikovsky.exception.SpeakerException;
 
 public class RemoteZoneManager implements ZoneManager {
     
-    private final Logger logger = LoggerFactory.getLogger(RemoteVolume.class);
     private final ZoneManagerInterface zoneManagerInterface;
 
     public RemoteZoneManager(ZoneManagerInterface zoneManagerInterface) {
@@ -52,13 +54,22 @@ public class RemoteZoneManager implements ZoneManager {
     }
 
     @Override
-    public RemoteZoneItem createZone(String[] speakers) throws SpeakerException {
-        logger.debug("Try to create zone " + speakers.toString());
+    public ZoneItem createZone(List<Speaker> speakerItems) throws SpeakerException {
         try {
+            String[] speakers = new String[speakerItems.size()];
+            for(int i=0; i < speakerItems.size(); i++) {
+                speakers[i] = "net.allplay.MediaPlayer.i" + speakerItems.get(i).getId();
+            }
+            
             return zoneManagerInterface.createZone(speakers);
         } catch (BusException e) {
             throw new SpeakerException("Unable to create zone", e);
         }
+    }
+    
+    @Override
+    public void releaseZone() throws SpeakerException {
+        createZone(new ArrayList<Speaker>());  
     }
 
 }

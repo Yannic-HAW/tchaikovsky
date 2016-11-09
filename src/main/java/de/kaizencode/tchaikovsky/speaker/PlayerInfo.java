@@ -32,6 +32,6 @@ public interface PlayerInfo {
 
     int getMaxVolume();
 
-    // ZoneInfo getZoneInfo();
+    ZoneInfo getZoneInfo();
 
 }
